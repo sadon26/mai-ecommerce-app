@@ -1,0 +1,395 @@
+@import 'mixins';
+@import 'variables';
+
+body {
+    margin: 0;
+    h1, p {
+        margin: 0;
+    }
+}
+
+.verify-acct-display {
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0,0,0,0.4);
+    left: 0;
+    top: 0;
+    border-radius: 4px;
+    text-align: center;
+    @include fontStyle(Poppins, 14px, 400, $darkGrey);
+    @include d-flex(center, center);
+    flex-direction: column;
+    .verify-acct-display__wrapper {
+        @include d-flex(center, center);
+        flex-direction: column;
+        width: 350px;
+        height: 180px;
+        background: #fff;
+        border-radius: 4px;
+        box-shadow: 0px 4px 12px -2px rgba(0,0,0,0.3);
+        left: 50%;
+        top: 50%;
+    }
+    .verify-acct-display__button {
+        width: 60px;
+        height: 40px;
+        background: $blue;
+        margin-top: 20px;
+        border-radius: 4px;
+        border: none;
+        color: #fff;
+        &:hover {
+            background: $lightBlue;
+            cursor: pointer;
+        }
+    }
+}
+.container {
+    width: 70%;
+    margin: 0 auto;
+}
+
+nav {
+    @include d-flex(space-between, center);
+    margin-top: 25px;
+    a {
+        @include fontStyle(PlayFairDisplay, 35px, 800, $darkGrey);
+        text-decoration: none;
+    }
+    div {
+        @include d-flex(space-between, center);
+        width: 200px;
+        p {
+            @include fontStyle(PlayFairDisplay, 15px, normal, $darkGrey);
+        }
+        .login-from-signup {
+            text-decoration: underline;
+            @include fontStyle(PlayFairDisplay, 15px, normal, #3468ff);
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+.below-nav {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 160px;
+    margin-top: 80px;
+    margin-bottom: 160px;
+    .left {
+        div {
+            width: 305px;
+            height: 300px;
+            object-fit: contain;
+        }
+        h1 {
+            @include fontStyle(PlayFairDisplay, 64px, 600, $darkGrey);
+        }
+        p {
+            width: 430px;
+            line-height: 1.71;
+            @include fontStyle(PlayFairDisplay, 17px, 400, $darkGrey);
+        }
+    }
+
+    .right {
+        .first {
+            @include d-flex(space-between, center);
+            width: 100%;
+            margin-bottom: 15px;
+            label {
+                display: block;
+                margin-bottom: 15px;
+                @include fontStyle(Poppins, 14px, 400, $darkGrey);
+            }
+            input {
+                @include forInput(180px, 15px, 50px);
+            }
+        }
+        .second {
+            margin-bottom: 15px;
+            label {
+                display: block;
+                margin-bottom: 15px;
+                @include fontStyle(Poppins, 14px, 400, $darkGrey);
+            }
+            input {
+                @include forInput(100%, 15px, 50px);
+            }
+        }
+        .third {
+            margin-bottom: 15px;
+            position: relative;
+            label {
+                display: block;
+                margin-bottom: 15px;
+                @include fontStyle(Poppins, 14px, 400, $darkGrey);
+            }
+            input {
+                @include forInput(100%, 15px, 50px);
+                padding-left: 110px;
+            }
+            .left-side {
+                margin-left: 20px;
+                @include d-flex(null, null);
+                position: absolute;
+                top: 52px;
+                div {
+                    margin-right: 15px;
+                }
+            }
+        }
+        .fourth {
+            margin-bottom: 15px;
+            position: relative;
+            label {
+                display: block;
+                margin-bottom: 15px;
+                @include fontStyle(Poppins, 14px, 400, $darkGrey);
+            }
+            input {
+                @include forInput(100%, 15px, 50px);
+            }
+            .show-password {
+                position: absolute;
+                right: 15px;
+                top: 52px;
+                color: #3468ff;
+                text-decoration: underline;
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+        }
+        .sign-up-with-google {
+            text-decoration: none;
+            width: 100%;
+            @include forInput(100%, 15px, 50px);
+            @include d-flex(space-between, center);
+            @include fontStyle(Poppins, 13px, 400, $darkGrey);
+            margin-bottom: 20px;
+            background-color: rgb(248, 248, 248);
+            .__text {
+                color: $darkGrey;
+            }
+            .sign-up-with-google__logo {
+                width: 30px;
+                height: 30px;
+                img {
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+        }
+        .fifth {
+            margin-bottom: 20px;
+            @include d-flex(space-between, flex-start);
+            input {
+                width: 24px;
+                height: 24px;
+            }
+            p {
+                width: 370px;
+                @include fontStyle(Poppins, 13px, 400, $darkGrey)
+            }
+        }
+        .signup-err__message {
+            margin: 20px auto;
+            @include d-flex(center, center);
+            @include fontStyle(Poppins, 13px, 400, red);
+        }
+        .rolling-spinner {
+            width: 100%;
+            height: 50px;
+            border-radius: 4px;
+            background: rgb(238, 238, 238);
+            @include d-flex(center, center);
+            .rolling-spinner__image {
+                width: 40px;
+                height: 40px;
+                img {
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+            &:hover {
+                cursor: not-allowed;
+            }
+        }
+        .signup-submit__btn {
+            width: 100%;
+            height: 54px;
+            border-radius: 3px;
+            background: $blue;
+            color: $white;
+            border: none;
+            outline: none;
+            &:hover {
+                cursor: pointer;
+                background-color: $lightBlue;
+                transition: .5s;
+            }
+        }
+        .not_checked {
+            background: rgb(238, 238, 238);
+            &:hover {
+                background: rgb(238, 238, 238);
+                cursor: not-allowed;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .container {
+        width: 75%;
+    }
+    nav {
+        p {
+            @include fontStyle(PlayFairDisplay, 25px, 800, $darkGrey);
+        }
+        div {
+            width: 180px;
+            p {
+                @include fontStyle(PlayFairDisplay, 14px, normal, $darkGrey);
+            }
+            a {
+                font-size: 14px;
+            }
+        }
+    }
+
+    .below-nav {
+        display: block;
+        margin-top: 20px;
+        margin-bottom: 60px;
+        .left {
+            div {
+                display: block;
+                width: 165px;
+                height: 120px;
+                margin: 0 auto;
+                img {
+                    width: 100%;
+                    height: 100%
+                }
+            }
+            h1 {
+                text-align: center;
+                margin-top: 20px;
+                @include fontStyle(PlayFairDisplay, 34px, 600, $darkGrey);
+            }
+            p {
+                text-align: center;
+                width: 260px;
+                line-height: 1.71;
+                margin: 25px auto;
+                @include fontStyle(PlayFairDisplay, 13px, 400, $darkGrey);
+            }
+        }
+        .right {
+            .first {
+                @include d-flex(space-between, center);
+                width: 100%;
+                margin-bottom: 10px;
+                label {
+                    text-align: center;
+                    display: block;
+                    margin-bottom: 10px;
+                    @include fontStyle(Poppins, 12px, 400, $darkGrey);
+                }
+                input {
+                    @include forInput(120px, 15px, 40px);
+                }
+            }
+            .second {
+                margin-bottom: 10px;
+                label {
+                    text-align: center;
+                    display: block;
+                    margin-bottom: 10px;
+                    @include fontStyle(Poppins, 12px, 400, $darkGrey);
+                }
+                input {
+                    @include forInput(100%, 15px, 40px);
+                }
+            }
+            .third {
+                margin-bottom: 10px;
+                position: relative;
+                label {
+                    text-align: center;
+                    display: block;
+                    margin-bottom: 10px;
+                    @include fontStyle(Poppins, 12px, 400, $darkGrey);
+                }
+                input {
+                    @include forInput(100%, 15px, 40px);
+                    padding-left: 110px;
+                }
+                .left-side {
+                    margin-left: 20px;
+                    @include d-flex(null, null);
+                    position: absolute;
+                    top: 39px;
+                    div {
+                        margin-right: 15px;
+                    }
+                }
+            }
+            .fourth {
+                text-align: center;
+                margin-bottom: 10px;
+                position: relative;
+                label {
+                    display: block;
+                    margin-bottom: 10px;
+                    @include fontStyle(Poppins, 12px, 400, $darkGrey);
+                }
+                input {
+                    @include forInput(100%, 15px, 40px);
+                }
+                p {
+                    position: absolute;
+                    right: 15px;
+                    top: 40px;
+                    color: #3468ff;
+                    text-decoration: underline;
+                    font-size: 12px;
+                    &:hover {
+                        cursor: pointer;
+                    }
+                }
+            }
+            .fifth {
+                margin-bottom: 20px;
+                @include d-flex(space-between, flex-start);
+                width: 100%;
+                input {
+                    width: 18px;
+                    height: 18px;
+                }
+                p {
+                    width: 320px;
+                    @include fontStyle(Poppins, 11px, 400, $darkGrey)
+                }
+            }
+            button {
+                width: 100%;
+                height: 40px;
+                border-radius: 3px;
+                background: #3468ff;
+                color: $white;
+                border: none;
+                &:hover {
+                    cursor: pointer;
+                    background-color: #144bee;
+                    transition: .5s;
+                }
+            }
+        }
+    }
+}

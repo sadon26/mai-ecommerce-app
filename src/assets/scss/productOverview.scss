@@ -1,0 +1,107 @@
+@import "./mixins";
+@import "./variables";
+
+div.product-overview-wrapper {
+  font-family: Montserrat;
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  z-index: 4;
+  background: rgba(0,0,0,0.4);
+    .product-overview {
+      position: absolute;
+      width: 100%;
+      bottom: 0px;
+      height: 336px;
+      background: #fff;
+      padding: 40px 60px;
+      box-sizing: border-box;
+      box-shadow: 0 -4px 14px -1px rgba(0,0,0,0.3);
+      border-radius: 8px 8px 0 0;
+      z-index: 1;
+      animation: slide-cart-in .5s ease-out both;
+      .cancel-icon {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        width: 15px;
+        background: rgba(0, 0, 0, 0.05);
+        border-radius: 50px;
+        padding: 10px;
+        @include d-flex(space-between, center);
+        transition: .3s ease-out;
+        &:hover {
+          background: rgba(0, 0, 0, 0.1);
+          cursor: pointer;
+        }
+        img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+      .product-overview-heading {
+        @include d-flex(space-between, center);
+        width: 100%;
+        margin-bottom: 30px;
+        & :nth-of-type(1) {
+          color: $darkGrey;
+          font-size: 24px;
+          margin: 0;
+          font-weight: 800;
+        }
+        & :nth-of-type(2) {
+          color: $pink;
+          font-size: 24px;
+          margin: 0;
+          font-weight: 600;
+        }
+      }
+      .product-description {
+        margin-bottom: 30px;
+      }
+      .product-add-btn {
+        & :nth-of-type(1) {
+          width: 164px;
+          height: 40px;
+          border-radius: 4px;
+          border: none;
+          outline: none;
+          background: $blue;
+          color: #fff;
+          margin-right: 30px;
+          transition: .5s;
+          &:hover {
+            cursor: pointer;
+            background: $lightBlue;
+          }
+        }
+        & :nth-of-type(2) {
+          width: 164px;
+          height: 40px;
+          border-radius: 4px;
+          border: none;
+          outline: none;
+          background: $pink;
+          color: #fff;
+          transition: .5s;
+          &:hover {
+            cursor: pointer;
+            background: #ce3f86;
+          }
+        }
+      }
+  }
+}
+
+@keyframes slide-cart-in {
+  0% {
+    transform: translateY(50vh);
+  }
+  80% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}

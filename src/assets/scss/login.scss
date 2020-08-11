@@ -1,0 +1,178 @@
+@import 'mixins';
+@import 'variables';
+
+div.form-wrapper {
+  background: rgba(0,0,0,0.8);
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  @include d-flex(center, center);
+  .right {
+    width: 400px;
+    .first {
+        @include d-flex(space-between, center);
+        width: 100%;
+        margin-bottom: 15px;
+        label {
+            display: block;
+            margin-bottom: 15px;
+            @include fontStyle(Poppins, 14px, 400, #fff);
+        }
+        input {
+            @include forInput(180px, 15px, 50px);
+        }
+    }
+    .second {
+        margin-bottom: 15px;
+        label {
+            display: block;
+            margin-bottom: 15px;
+            @include fontStyle(Poppins, 14px, 400, #fff);
+        }
+        input {
+            @include forInput(100%, 15px, 50px);
+        }
+    }
+    .third {
+        margin-bottom: 15px;
+        position: relative;
+        label {
+            display: block;
+            margin-bottom: 15px;
+            @include fontStyle(Poppins, 14px, 400, #fff);
+        }
+        input {
+            @include forInput(100%, 15px, 50px);
+            padding-left: 110px;
+        }
+        .left-side {
+            margin-left: 20px;
+            @include d-flex(null, null);
+            position: absolute;
+            top: 52px;
+            div {
+              @include d-flex(null, center);
+              margin-right: 15px;
+            }
+        }
+    }
+    .fourth {
+        margin-bottom: 15px;
+        position: relative;
+        label {
+            display: block;
+            margin-bottom: 15px;
+            @include fontStyle(Poppins, 14px, 400, #fff);
+        }
+        input {
+            @include forInput(100%, 15px, 50px);
+        }
+        .show-password {
+            position: absolute;
+            right: 15px;
+            top: 52px;
+            color: #3468ff;
+            text-decoration: underline;
+            margin: 0;
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+    .sign-up-with-google {
+        text-decoration: none;
+        .sign-up-with-google__wrapper {
+            width: 100%;
+            @include forInput(100%, 15px, 50px);
+            @include d-flex(space-between, center);
+            @include fontStyle(Poppins, 13px, 400, #fff);
+            margin-bottom: 20px;
+            background-color: rgb(248, 248, 248);
+            .__text {
+                color: $darkGrey;
+            }
+        }
+        .sign-up-with-google__logo {
+            width: 30px;
+            height: 30px;
+            img {
+                width: 100%;
+                height: 100%;
+            }
+        }
+    }
+    .fifth {
+        margin-bottom: 20px;
+        @include d-flex(space-between, flex-start);
+        input {
+            width: 24px;
+            height: 24px;
+        }
+        p {
+            width: 370px;
+            @include fontStyle(Poppins, 13px, 400, $darkGrey)
+        }
+    }
+    .signup-err__message {
+        margin: 20px auto;
+        @include d-flex(center, center);
+        @include fontStyle(Poppins, 13px, 400, red);
+    }
+    .rolling-spinner {
+        width: 100%;
+        height: 50px;
+        border-radius: 4px;
+        background: rgb(238, 238, 238);
+        @include d-flex(center, center);
+        .rolling-spinner__image {
+            width: 40px;
+            height: 40px;
+            img {
+                width: 100%;
+                height: 100%;
+            }
+        }
+        &:hover {
+            cursor: not-allowed;
+        }
+    }
+    .signup-submit__btn {
+        width: 100%;
+        height: 54px;
+        border-radius: 3px;
+        background: $blue;
+        color: $white;
+        border: none;
+        outline: none;
+        &:hover {
+            cursor: pointer;
+            background-color: $lightBlue;
+            transition: .5s;
+        }
+    }
+    .not_checked {
+        background: rgb(238, 238, 238);
+        &:hover {
+            background: rgb(238, 238, 238);
+            cursor: not-allowed;
+        }
+    }
+  }
+  .modal-cancel {
+    width: 19px;
+    height: 19px;
+    position: absolute;
+    top: 40px;
+    right: 40px;
+    &:hover {
+      cursor: pointer;
+    }
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}

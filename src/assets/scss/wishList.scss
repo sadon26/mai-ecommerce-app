@@ -1,0 +1,63 @@
+@import 'mixins';
+@import 'variables';
+
+div.wish-list {
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  background: transparent;
+  .wish-list-wrapper {
+    position: absolute;
+    right: 0;
+    top: 10%;
+    width: 500px;
+    background: #fff;
+    height: 610px;
+    padding: 20px;
+    box-sizing: border-box;
+    border-radius: 8px 0 0 8px;
+    transform: translateY(-50%);
+    box-shadow: 0 1px 40px -2px rgba(0,0,0,0.2);
+    border: 1px solid rgb(204, 204, 204,0.5);
+    animation: slide-from-side-in .5s both ease-out;
+    .wish-list-heading {
+      @include d-flex(space-between, center);
+      .wish-list-heading__text {
+        font-weight: 700;
+        color: $darkGrey;
+        font-size: 18px;
+      }
+      .wish-list-cancel {
+        width: 20px;
+        height: 20px;
+        background: rgba(0,0,0,0.041);
+        padding: 10px;
+        border-radius: 50px;
+        &:hover {
+          cursor: pointer;
+        }
+        img {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
+.slide-from-side-enter-active {
+  animation: slide-from-slide-in .5s ease-out;
+}
+
+.slide-from-side-leave-active {
+  animation: slide-from-slide-in .5s reverse;
+}
+
+@keyframes slide-from-side-in {
+  0% {
+    transform: translateX(100vw);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
