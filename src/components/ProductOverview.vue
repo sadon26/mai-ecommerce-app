@@ -6,7 +6,7 @@
     </div>
     <div class="product-overview-heading">
       <p>{{ productOverview.product_name }}</p>
-      <p>₦{{ productOverview.price }}</p>
+      <p>{{ productOverview.price | toCurrency }}</p>
     </div>
     <div class="product-description">
       {{ productOverview.product_description }}
@@ -34,7 +34,8 @@ import { mapGetters, mapActions } from 'vuex';
       ]),
       addToCart(productOverview) {
         if (this.$store.getters.isLoggedIn) {
-          this.$store.dispatch('addToCart', productOverview)
+          const token = this.$store.getters.user.token;
+          this.$store.dispatch('addToCart', { productOverview, uuid: this.$uuid, token })
         } else {
           this.$store.dispatch('toggleLoginModal', true)
         }

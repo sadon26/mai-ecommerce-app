@@ -6,6 +6,7 @@ const Signup = () => import('../views/auth/Signup.vue');
 const Landing = () => import('../views/Landing.vue');
 const Home = () => import('../views/Home.vue');
 const Categories = () => import('../views/Categories.vue');
+const Cart = () => import('../views/Cart.vue');
 
 Vue.use(VueRouter)
 
@@ -30,6 +31,11 @@ const routes = [
         name: 'Categories',
         component: Categories,
       },
+      {
+        path: '/cart',
+        name: 'Cart',
+        component: Cart,
+      }
     ]
   },
 ]

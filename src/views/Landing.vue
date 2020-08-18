@@ -13,12 +13,12 @@
   <router-view />
   <Login v-if="loginModal" />
   <div class="cart-and-wishlist-wrap">
-    <div v-if="isLoggedIn" class="cart-icon">
+    <router-link :to="{ path: '/cart' }" v-if="isLoggedIn" class="cart-icon">
       <img src="../assets/images/shopping-cart.png" alt="shopping-cart">
       <div v-if="cartItems.length" class="items-in-cart">
         {{ cartItems.length }}
       </div>
-    </div>
+    </router-link>
     <div v-if="isLoggedIn" @click="$store.dispatch('showHideWishList', true)" class="wishlist-icon">
       <img v-if="!wishList.length" src="../assets/images/wishlist-icon.svg">
       <img class="heart-animated" v-if="wishList.length" src="../assets/images/full-heart-icon.png">
@@ -27,6 +27,7 @@
       </div>
     </div>
   </div>
+  <Footer />
     <WishList v-if="showHideWishList" />
 </div>
 </template>
@@ -34,6 +35,7 @@
 <script>
 import { mapActions, mapGetters } from 'vuex'
 import NavBar from '@/components/NavBar'
+import Footer from '@/components/Footer'
 import Login from '@/components/Login'
 import LoginSuccessPopup from '@/components/Popup/loginSuccessPopup'
 import ItemAddedPopup from '@/components/Popup/itemAddedPopup'
@@ -54,6 +56,7 @@ export default {
     ItemAddedPopup,
     WishListAddedPopup,
     WishList,
+    Footer,
   },
   computed: {
     ...mapGetters({
@@ -70,6 +73,7 @@ export default {
     if (this.$store.getters.isLoggedIn) {
       const token = this.$store.getters.user.token;
       this.$store.dispatch('getAllWishLists', token);
+      this.$store.dispatch('getAllCartItems', token);
     }
   },
   methods: {

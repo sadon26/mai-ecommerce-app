@@ -5,6 +5,7 @@
       :per-page="1" 
       :autoplayTimeout="3000"
       :loop="true"
+      :paginationEnabled="false"
       :autoplayLoop="true"
       :mouse-drag="true">
       <slide>

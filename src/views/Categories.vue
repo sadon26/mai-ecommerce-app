@@ -16,7 +16,7 @@
         </div>
         <div class="category-name__product__description">
           <p class="category-name__product__description__text">{{ data.product_name }}</p>
-          <p class="category-name__product__description__text"><span>Price:</span> ₦{{ data.price }}</p>
+          <p class="category-name__product__description__text"><span>Price:</span> {{ data.price | toCurrency }}</p>
           <p class="category-name__product__description__text"><span>Quantity:</span> {{ data.quantity }}</p>
           <p class="category-name__product__description__text"><span>Status:</span> {{ data.status }}</p>
         </div>
@@ -53,7 +53,7 @@ export default {
     ...mapActions([
       'showProductOverview',
     ])
-  }
+  },
 }
 </script>
 
