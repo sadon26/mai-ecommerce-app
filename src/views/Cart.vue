@@ -23,6 +23,7 @@
       <p class="cart__data-heading two">QUANTITY</p>
       <p class="cart__data-heading three">UNIT PRICE</p>
       <p class="cart__data-heading four">SUB TOTAL</p>
+
       <div v-for="(item, index) in cartItems" :key="index" 
       class="cart__data-item"
       >
@@ -59,6 +60,27 @@
           </div>
         </div>
       </div>
+
+      <div class="cart__total">
+        <div class="cart__total-wrapper">
+          <div class="cart_-total-price">
+            <span class="cart__total-title">Total:</span>
+            <span class="cart__total-value">{{ total | toCurrency }}</span>
+          </div>
+          <p class="cart__delivery-detail">Delivery fee not included yet</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cart__proceed-to-checkout">
+    <div class="cart__proceed-to-checkout-btn-wrapper">
+      <div @click="goBack" class="cart__proceed-to-checkout-btn back">
+        GO BACK
+      </div>
+      <router-link class="cart__proceed-to-checkout-btn" :to="{ path: '/checkout' }">
+        PROCEED TO CHECKOUT
+      </router-link>
     </div>
   </div>
 </div>
@@ -66,6 +88,8 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import { store } from '../store/store'
+import router from '../router/index'
 
   export default {
     data() {
@@ -80,6 +104,14 @@ import { mapGetters } from 'vuex'
         'quantityInCart',
         'loadingCart',
       ]),
+      total() {
+        let total = 0
+        this.cartItems.map(item => {
+          total += item.sub_total
+        })
+        console.log(total)
+        return total
+      }
     },
     methods: {
       deleteCartItem(id) {
@@ -89,7 +121,13 @@ import { mapGetters } from 'vuex'
       updateQuantity(data) {
         const token = this.$store.getters.user.token;
         this.$store.dispatch('updateQuantity', {data, token})
+      },
+      goBack() {
+        this.$router.go(-1)
       }
+    },
+    beforeRouteEnter(to, from, next) {
+      store.getters.isLoggedIn ? next() : router.push({ path: '/signup' })
     },
     created() {
       if(this.$store.getters.isLoggedIn) {

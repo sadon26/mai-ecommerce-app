@@ -1,12 +1,12 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-
 const Signup = () => import('../views/auth/Signup.vue');
 const Landing = () => import('../views/Landing.vue');
 const Home = () => import('../views/Home.vue');
 const Categories = () => import('../views/Categories.vue');
 const Cart = () => import('../views/Cart.vue');
+const Checkout = () => import('../views/Checkout.vue');
 
 Vue.use(VueRouter)
 
@@ -35,7 +35,12 @@ const routes = [
         path: '/cart',
         name: 'Cart',
         component: Cart,
-      }
+      },
+      {
+        path: '/checkout',
+        name: 'Checkout',
+        component: Checkout,
+      },
     ]
   },
 ]

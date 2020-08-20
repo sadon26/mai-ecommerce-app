@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="categories__wrapper">
   <div class="categories">
     <div v-if="loadingCategorySpinner" class="loading-category-spinner">
       <img src="../assets/images/Ellipsis-spinner.svg" alt="ellipsis-spinner">

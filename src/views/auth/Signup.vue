@@ -164,7 +164,7 @@ export default {
         toggleLoginModal(data) {
             this.$store.dispatch('toggleLoginModal', data)
         }
-    }
+    },
 }
 </script>
 

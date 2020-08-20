@@ -1,0 +1,148 @@
+@import "./mixins";
+@import "./variables";
+
+div.add__new-address-wrapper {
+  form.add__new-address {
+    padding: 20px;
+    .add__new-address-heading {
+      margin: 0;
+      color: $darkGrey;
+      font-weight: 600;
+      margin-bottom: 30px;
+      color: $pink;
+    }
+    .add__first-n-last-name {
+      @include d-flex(space-between, center);
+      margin-bottom: 20px;
+      .add__first-name, .add__last-name {
+        width: 370px;
+        height: 40px;
+        margin-bottom: 30px;
+        label {
+          color: $darkGrey;
+          font-weight: 500;
+          font-size: 14px;
+          display: block;
+          margin-bottom: 10px;
+        }
+        input {
+          width: 100%;
+          height: 100%;
+          padding: 10px;
+          box-sizing: border-box;
+          border-radius: 2px;
+          border: 1px solid #ccc;
+        }
+      }
+    }
+    .add__mobile-number, .additional__mobile-number {
+      width: 100%;
+      margin-top: 20px;
+      label {
+        display: block;
+        margin-bottom: 10px;
+        font-weight: 500;
+        font-size: 14px;
+        color: $darkGrey;
+      }
+      .add__mobile-number-input {
+        @include d-flex(space-between, center);
+        .add__mobile-number-input-left {
+          width: 7%;
+          height: 40px;
+          @include d-flex(center, center);
+          border-radius: 2px;
+          border: 1px solid #ccc;
+        }
+        .add__mobile-number-input-right {
+          width: 91%;
+          height: 40px;
+          border: 1px solid #ccc;
+          border-radius: 2px;
+          padding: 10px;
+          box-sizing: border-box;
+        }
+      }
+    }
+    .add__address {
+      width: 100%;
+      margin-top: 20px;
+      margin-bottom: 20px;
+      label {
+        display: block;
+        margin-bottom: 10px;
+        font-weight: 500;
+        font-size: 14px;
+        color: $darkGrey;
+      }
+      .add__address-input {
+        .add__address-input-right {
+          width: 100%;
+          height: 110px;
+          border: 1px solid #ccc;
+          border-radius: 2px;
+          padding: 10px;
+          box-sizing: border-box;
+        }
+      }
+    }
+    .address-for-state, .address-for-city {
+      margin-bottom: 10px;
+      label {
+        display: block;
+        margin-bottom: 10px;
+        font-weight: 500;
+        font-size: 14px;
+        color: $darkGrey;
+      }
+      select {
+        width: 100%;
+        height: 40px;
+        padding: 10px;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 2px;
+      }
+    }
+    .show__additional-phone-no {
+      @include d-flex(flex-end, center);
+      font-size: 12px;
+      margin-top: 10px;
+      .show__additional-phone-no-add {
+        background: grey;
+        @include d-flex(center, center);
+        color: #fff;
+        border-radius: 50px;
+        width: 15px;
+        height: 15px;
+        margin-right: 5px;
+        font-size: 20px;
+      }
+      .show__additional-phone-no-add-second {
+        margin: 0;
+      }
+      &:hover {
+        cursor: pointer;
+      }
+      &:hover .show__additional-phone-no-add-second {
+        color: $blue;
+      }
+      &:hover .show__additional-phone-no-add {
+        background: $blue;
+      }
+    }
+    .btn__save-address-details {
+      width: 100%;
+      height: 40px;
+      background: $pink;
+      border-radius: 4px;
+      border: none;
+      color: #fff;
+      transition: .3s;
+      &:hover {
+        cursor: pointer;
+        background: darken($pink, 8%);
+      }
+    }
+  }
+}

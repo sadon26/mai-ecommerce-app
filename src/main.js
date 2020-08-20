@@ -18,7 +18,6 @@ Vue.filter('toCurrency', (val) => {
   return '₦' + naira + '.' + kobo.slice(0, 2);
 })
 
-
 Vue.config.productionTip = false;
 
 Vue.prototype.$axios = axios;
@@ -29,6 +28,8 @@ new Vue({
   router,
   render: h => h(App)
 }).$mount('#app')
+
+export const eventBus = new Vue({})
 
 const token = store.getters.user.token;
 

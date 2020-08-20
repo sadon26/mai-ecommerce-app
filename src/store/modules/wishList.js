@@ -84,12 +84,22 @@ export const actions = {
       setTimeout(() => commit('wishListAddedPopup', false), 3000);
     })
   },
-  moveToCart({ commit }, payload) {
+  moveToCart({ commit, dispatch }, payload) {
     const { token, item } = payload
-    console.log(token, item.id);
     const config = { headers: { token } }
-    axios.post('wishlist', { id: item.id }, config)
-      .then(res => console.log(res))
-        .catch(err => console.log(err.response.data.message))
+    axios.post('/cart/wishlist', { id: item.id }, config)
+    .then(res => {
+      console.log(res)
+      commit('wishListAddedPopup', true);
+      dispatch('getAllCartItems', token)
+      commit('wishListMessage', `${item.product_name} has been added to the Cart`);
+      setTimeout(() => commit('wishListAddedPopup', false), 3000);
+    })
+    .catch(err => {
+      console.log(err.response.data.message)
+      commit('wishListAddedPopup', true);
+      commit('wishListMessage', `${err.response.data.message}`);
+      setTimeout(() => commit('wishListAddedPopup', false), 3000);
+    })
   }
 }

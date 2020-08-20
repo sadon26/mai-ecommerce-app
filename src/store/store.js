@@ -8,6 +8,7 @@ import * as LoginModal from './modules/loginModal'
 import * as productOverview from './modules/productOverview'
 import * as cartItem from './modules/cartItem'
 import * as wishList from './modules/wishList'
+import * as checkout from './modules/checkout'
 
 const vuexPersistence = new VuexPersistence({
   storage: localStorage
@@ -24,6 +25,7 @@ export const store = new Vuex.Store({
     productOverview,
     cartItem,
     wishList,
+    checkout,
   },
   plugins: [vuexPersistence.plugin],
 })

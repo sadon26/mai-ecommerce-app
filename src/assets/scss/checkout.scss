@@ -1,0 +1,83 @@
+@import 'mixins';
+@import 'variables';
+
+div.checkout__wrapper {
+  width: 100%;
+  padding-top: 50px;
+  padding-bottom: 20px;
+  background: #f5f5f5;
+  .checkout {
+    width: 80%;
+    margin: 0 auto;
+    .address__n__subtotal {
+      @include d-flex(space-between, null);
+      .checkout-address {
+        @include addressSubtotal(60%, auto);
+        position: relative;
+        .checkout-address-heading {
+          @include d-flex(null, center);
+          border-bottom: 1px solid #ccc;
+          padding-bottom: 10px;
+          box-sizing: border-box;
+          .checkout-address-heading-image {
+            width: 25px;
+            margin-right: 10px;
+            img {
+              width: 100%;
+            }
+          }
+          .checkout-address-heading-text {
+            color: $darkGrey;
+            font-weight: 700;
+            margin: 0;
+          }
+        }
+        .checkout-no-address-details {
+          text-align: center;
+          margin-top: 20px;
+          color: $darkGrey;
+        }
+        .checkout-address-details {
+          padding: 20px;
+          padding-left: 30px;
+          .checkout-address-details-full-name {
+            font-size: 15px;
+            color: $darkGrey;
+            font-weight: 500;
+            margin-bottom: 10px;
+          }
+          .checkout-address-details-location {
+            color: #909095;
+            & :nth-of-type(1) {
+              margin-bottom: 10px;
+            }
+          }
+        }
+        .edit-icon-box {
+          position: absolute;
+          width: 50px;
+          height: 50px;
+          border-radius: 50px;
+          background: #fff;
+          @include d-flex(center, center);
+          top: 0;
+          right: 0;
+          transform: translate(50%, -50%);
+          box-shadow: 0 4px 12px -3px rgba(0, 0, 0, 0.4);
+          &:hover {
+            cursor: pointer;
+          }
+          .edit-icon {
+            width: 25px;
+            img {
+              width: 100%;
+            }
+          }
+        }
+      }
+      .checkout-subtotal {
+        @include addressSubtotal(35%, 200px);
+      }
+    }
+  }
+}
