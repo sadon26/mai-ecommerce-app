@@ -71,7 +71,7 @@ export const mutations = {
 }
 
 export const actions = {
-  signup({ commit }, userDetails) {
+  signup({ commit, dispatch }, userDetails) {
     commit('isLoading', true);
     commit('errMessage', false);
     axios.post("/auth/register", userDetails)
@@ -79,6 +79,8 @@ export const actions = {
         commit('isLoading', false);
         commit('signup', userDetails);
         commit('verifyAcctDisplay', true);
+        dispatch('getAllCartItems', res.data.data.token)
+        dispatch('getAllWishlists', res.data.data.token)
         commit('storeUser', res);
         console.log(res)
       })

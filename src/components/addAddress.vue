@@ -1,7 +1,8 @@
 <template>
 <div class="add__new-address-wrapper">
   <form @submit.prevent="submitAddress" class="add__new-address">
-    <p class="add__new-address-heading">ADD ADDRESS</p>
+    <p v-if="!editAddressDetails" class="add__new-address-heading">ADD ADDRESS</p>
+    <p v-else class="add__new-address-heading">EDIT ADDRESS</p>
     <div class="add__first-n-last-name">
       <div class="add__first-name">
         <label for="">First name *</label>
@@ -63,14 +64,15 @@
         <option selected v-for="(data, index) in lgas" :key="index">{{ data }}</option>
       </select>
     </div>
-
-    <button class="btn__save-address-details">SAVE</button>
+    <button v-if="!editAddressDetails" class="btn__save-address-details">SAVE</button>
+    <button v-else class="btn__save-address-details">UPDATE</button>
   </form>
 </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
+
   export default {
     data() {
       return {
@@ -87,13 +89,15 @@ import { mapGetters } from 'vuex'
     computed: {
       ...mapGetters([
         'statesAndLga',
-        'lgas'
+        'lgas',
+        'editAddressDetails',
+        'showAddAddress',
       ]),
     },
     methods: {
       selectState() {
         console.log(this.lgas)
-        this.$store.commit('updaTeSelectedLga', this.state_region);
+        this.$store.commit('updateSelectedLga', this.state_region);
       },
       submitAddress() {
         const token = this.$store.getters.user.token
@@ -109,6 +113,21 @@ import { mapGetters } from 'vuex'
         this.$store.dispatch('addAddress', {addressDetails, token});
       }
     },
+    watch: {
+      editAddressDetails: {
+        handler(value) {
+          console.log(value, this.editAddressDetails.data);
+          this.state_region = value.data.state_region
+          this.first_name = value.data.first_name
+          this.last_name = value.data.last_name
+          this.mobile_number = value.data.mobile_number
+          this.additional_mobile_number = value.data.additional_mobile_number
+          this.address = value.data.address
+          this.city = value.data.city
+        },
+        immediate: true,
+      },
+    }
   }
 </script>
 

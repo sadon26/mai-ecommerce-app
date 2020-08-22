@@ -28,7 +28,7 @@
               </div>
           </div>
 
-          <div @click="showEditAddress" class="edit-icon-box">
+          <div @click="showEditAddress(true)" class="edit-icon-box">
             <div class="edit-icon">
               <img src="../assets/images/edit-icon.svg" alt="edit-icon">
             </div>
@@ -37,6 +37,12 @@
         <div class="checkout-subtotal">
           lmsf
         </div>
+      </div>
+    </div>
+
+    <div v-if="addressSpinnerLoading" class="updating-address-spinner-bg">
+      <div class="updating-address-spinner">
+        <img src="../assets/images/rolling-spinner.svg" alt="rolling-spinner">
       </div>
     </div>
 
@@ -59,6 +65,7 @@ import { mapGetters } from 'vuex';
       ...mapGetters([
         'address',
         'showEditAddressBox',
+        'addressSpinnerLoading',
       ]),
       defaultAddress() {
         const defaultAddress = this.address.filter(data => data.is_default === "true");
@@ -74,6 +81,8 @@ import { mapGetters } from 'vuex';
       this.$store.dispatch('getAddress', token);
       this.getStates();
       this.$store.commit('showEditAddressBox', false);
+      this.$store.commit('editAddressDetails', null);
+      this.$store.commit('showAddAddress', false);
       this.defaultAddress
     },
     methods: {
@@ -89,7 +98,7 @@ import { mapGetters } from 'vuex';
       showEditAddress(payload) {
         this.$store.commit('showEditAddressBox', payload)
       }
-    }
+    },
   }
 </script>
 

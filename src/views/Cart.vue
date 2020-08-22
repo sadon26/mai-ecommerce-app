@@ -83,6 +83,12 @@
       </router-link>
     </div>
   </div>
+
+  <div v-if="addressSpinnerLoading" class="updating-address-spinner-bg">
+    <div class="updating-address-spinner">
+      <img src="../assets/images/rolling-spinner.svg" alt="rolling-spinner">
+    </div>
+  </div>
 </div>
 </template>
 
@@ -103,6 +109,7 @@ import router from '../router/index'
         'cartItems',
         'quantityInCart',
         'loadingCart',
+        'addressSpinnerLoading',
       ]),
       total() {
         let total = 0

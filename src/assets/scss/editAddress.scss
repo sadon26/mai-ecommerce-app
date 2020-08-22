@@ -37,6 +37,7 @@ div.edit__address {
       }
     }
     .all_addresses {
+      position: relative;
       .address__book-heading {
         color: $darkGrey;
         font-weight: 600;
@@ -69,7 +70,7 @@ div.edit__address {
       }
       .all__addresses-wrapper {
         padding-left: 20px;
-        height: 350px;
+        height: 390px;
         overflow: auto;
         @include addScrollBar;
         border-bottom: 1px solid rgba(69,80,101, 0.3);
@@ -84,16 +85,45 @@ div.edit__address {
           .default-address-details-input {
             margin-right: 10px;
           }
-          .default-address-full-name {
-            font-size: 15px;
-            color: $blue;
-            font-weight: 500;
-            margin-bottom: 10px;
-          }
-          .default-address-location {
-            color: #909095;
-            & :nth-of-type(1) {
+          .default-address-details-wrapper {
+            width: 100%;
+            @include d-flex(space-between, flex-start);
+            .default-address-full-name {
+              font-size: 15px;
+              color: $blue;
+              font-weight: 500;
               margin-bottom: 10px;
+            }
+            .default-address-location {
+              color: #909095;
+              & :nth-of-type(1) {
+                margin-bottom: 10px;
+              }
+            }
+            .address-edit-and-remove {
+              margin-right: 50px;
+              & :nth-of-type(1), :nth-of-type(2) {
+                margin: 0;
+                margin-bottom: 10px;
+                font-size: 13px;
+                color: #fff;
+                padding: 5px 10px;
+                background: $blue;
+                border-radius: 4px;
+                text-align: center;
+                transition: .3s;
+                &:hover {
+                  cursor: pointer;
+                  background: darken($blue, 15%);
+                }
+              }
+              & :nth-of-type(2) {
+                background: $pink;
+                &:hover {
+                  cursor: pointer;
+                  background: darken($pink, 15%);
+                }
+              }
             }
           }
         }
@@ -117,6 +147,22 @@ div.edit__address {
       img {
         width: 100%;
       }
+    }
+  }
+  .save-address-as-default {
+    padding: 10px 15px;
+    background: $blue;
+    border: none;
+    border-radius: 4px;
+    position: absolute;
+    left: 50%;
+    bottom: -47px;
+    transform: translateX(-50%);
+    color: #fff;
+    transition: .3s;
+    &:hover {
+      cursor: pointer;
+      background: darken($blue, 15%);
     }
   }
 }

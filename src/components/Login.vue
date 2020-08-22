@@ -24,7 +24,7 @@
       <p class="signup-err__message" v-if="errorMessage">{{ errorMessage }}</p>
       <button 
         class="signup-submit__btn" 
-        :disabled="loginLoading" 
+        :disabled="loginLoading"
         v-if="!loginLoading">
         Login
       </button>

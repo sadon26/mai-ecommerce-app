@@ -33,7 +33,7 @@ export const eventBus = new Vue({})
 
 const token = store.getters.user.token;
 
-const validateToken = (token) => {
+const refreshToken = (token) => {
   const interval = setInterval(() => {
     const decoded = jwt_decode(token);
     const date = new Date();
@@ -45,4 +45,12 @@ const validateToken = (token) => {
   }, 1000);
 }
 
-validateToken(token)
+axios.get('/token')
+.then(res => {
+  console.log(res.data.token)
+  const decoded = jwt_decode(res.data.token);
+  console.log(decoded)
+  })
+    .catch(err => console.log(err))
+
+refreshToken(token)

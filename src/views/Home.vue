@@ -57,6 +57,8 @@ export default {
           .then(res => {
             console.log(res);
             store.dispatch('signinWithGoogle', {res, token});
+            store.dispatch('getAllCartItems', token)
+            store.dispatch('getAllWishlists', token)
           })
             .catch(err => console.log(err));
       }
@@ -64,6 +66,6 @@ export default {
     } else {
       next('/')
     }
-  }
+  },
 }
 </script>

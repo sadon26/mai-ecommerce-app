@@ -90,6 +90,7 @@ export const actions = {
     const { data, token } = payload;
     const config = { headers: { token } };
     console.log(data.item.product_name, data.quantity)
+    commit('addressSpinnerLoading', true)
     axios.post('/search/product', { product_name: data.item.product_name })
       .then(res => {
         const availableQuantity = res.data.data.quantity
@@ -97,20 +98,28 @@ export const actions = {
         console.log(res.data.data.quantity)
         if (requestedQuantity <= availableQuantity) {
           axios.patch('/cart', { id: data.item.id, quantity: requestedQuantity }, config)
-            .then(res => {
+          .then(res => {
+              commit('addressSpinnerLoading', false)
               console.log(res)
               commit('wishListAddedPopup', true)
               commit('wishListMessage', `Quantity updated successfully`);
               dispatch('getAllCartItems', token)
               setTimeout(() => commit('wishListAddedPopup', false), 3000);
             })
-            .catch(err => console.log(err.response.data.message))
+            .catch(err => {
+              console.log(err.response.data.message)
+              commit('addressSpinnerLoading', false)
+            })
           } else {
             commit('wishListAddedPopup', true)
             commit('wishListMessage', `Only ${availableQuantity} quantities left for this product`);
             setTimeout(() => commit('wishListAddedPopup', false), 3000);
-        }
-      })
-        .catch(err => console.log(err.response.data.message))
+            commit('addressSpinnerLoading', false)
+          }
+        })
+        .catch(err => {
+          console.log(err.response.data.message)
+          commit('addressSpinnerLoading', false)
+        })
   }
 }

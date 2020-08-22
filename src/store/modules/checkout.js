@@ -7,6 +7,7 @@ export const state = {
   addressSpinnerLoading: false,
   showEditAddressBox: true,
   showAddAddress: false,
+  editAddressDetails: '',
 }
 export const getters = {
   address: state => state.address,
@@ -15,6 +16,7 @@ export const getters = {
   addressSpinnerLoading: state => state.addressSpinnerLoading,
   showEditAddressBox: state => state.showEditAddressBox,
   showAddAddress: state => state.showAddAddress,
+  editAddressDetails: state => state.editAddressDetails,
 }
 
 export const mutations = {
@@ -30,7 +32,7 @@ export const mutations = {
     state.lgas = lga[0].lgas
     console.log(state.lgas)
   },
-  updaTeSelectedLga(state, payload) {
+  updateSelectedLga(state, payload) {
     const lga = state.statesAndLga.filter(state => state.alias === payload)
     state.lgas = lga[0].lgas
     console.log(state.lgas)
@@ -43,18 +45,27 @@ export const mutations = {
   },
   showAddAddress(state, payload) {
     state.showAddAddress = payload
-  }
+  },
+  editAddressDetails(state, payload) {
+    console.log(payload)
+    state.editAddressDetails = payload
+  },
 }
 
 export const actions = {
   getAddress({ commit }, token) {
     const config = { headers: { token } };
+    commit('addressSpinnerLoading', true)
     axios.get('address', config)
     .then(res => {
       console.log(res)
+      commit('addressSpinnerLoading', false)
       commit('getAddress', res.data.data)
     })
-    .catch(err => console.log(err))
+    .catch(err => {
+      console.log(err)
+      commit('addressSpinnerLoading', false)
+    })
   },
   addAddress({ commit, dispatch }, payload) {
     const { addressDetails, token } = payload
@@ -71,6 +82,52 @@ export const actions = {
     })
     .catch(err => {
       console.log(err)
+      commit('addressSpinnerLoading', false)
+    })
+  },
+  editAddress({ commit }, payload) {
+    const { id, token } = payload
+    const config = { headers: { token } };
+    commit('addressSpinnerLoading', true)
+    axios.get(`/oneAddress/${id}`, config)
+    .then(res => {
+      commit('addressSpinnerLoading', false)
+      commit('editAddressDetails', res.data)
+      commit('showAddAddress', true)
+    })
+    .catch(err => {
+      console.log(err.response.data.message)
+      commit('addressSpinnerLoading', false)
+    })
+  },
+  removeAddress({ commit, dispatch }, payload) {
+    const { id, token } = payload
+    const config = { headers: { token } };
+    commit('addressSpinnerLoading', true)
+    axios.delete(`/address/${id}`, config)
+    .then(res => {
+      commit('addressSpinnerLoading', false);
+      console.log(res)
+      dispatch('getAddress', token)
+    })
+    .catch(err => {
+      console.log(err.response.data.message)
+      commit('addressSpinnerLoading', false)
+    })
+  },
+  saveAsDefaultAddress({ commit, dispatch }, payload) {
+    const { id, token } = payload;
+    const config = { headers: { token } };
+    commit('addressSpinnerLoading', true)
+    axios.patch('/address', {id}, config)
+    .then(res => {
+      console.log(res)
+      dispatch('getAddress', token);
+      commit('showEditAddressBox', false)
+      commit('addressSpinnerLoading', false)
+    })
+    .catch(err => {
+      console.log(err.response.data.message)
       commit('addressSpinnerLoading', false)
     })
   }
