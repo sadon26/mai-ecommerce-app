@@ -1,6 +1,6 @@
 <template>
-<div class="product-overview-wrapper">
-  <div class="product-overview">
+<div @click="hideProductModal" class="product-overview-wrapper">
+  <div ref="productOverview" class="product-overview">
     <div @click="hideProductOverview" class="cancel-icon">
       <img src="../assets/images/cancel-black.svg" alt="cancel-icon">
     </div>
@@ -32,6 +32,11 @@ import { mapGetters, mapActions } from 'vuex';
       ...mapActions([
         'hideProductOverview',
       ]),
+      hideProductModal(e) {
+        if(e.target.classList[0] === "product-overview-wrapper") {
+          this.hideProductOverview()
+        }
+      },
       addToCart(productOverview) {
         if (this.$store.getters.isLoggedIn) {
           const token = this.$store.getters.user.token;
