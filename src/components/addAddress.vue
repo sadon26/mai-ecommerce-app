@@ -1,6 +1,6 @@
 <template>
 <div class="add__new-address-wrapper">
-  <form @submit.prevent="submitAddress" class="add__new-address">
+  <form @submit.prevent="!editAddressDetails ? submitAddress() : updateAddress()" class="add__new-address">
     <p v-if="!editAddressDetails" class="add__new-address-heading">ADD ADDRESS</p>
     <p v-else class="add__new-address-heading">EDIT ADDRESS</p>
     <div class="add__first-n-last-name">
@@ -111,19 +111,37 @@ import { mapGetters } from 'vuex'
           city: this.city,
         }
         this.$store.dispatch('addAddress', {addressDetails, token});
+      },
+      updateAddress() {
+        const token = this.$store.getters.user.token
+        const addressDetails = {
+          state_region: this.state_region,
+          first_name: this.first_name,
+          last_name: this.last_name,
+          mobile_number: this.mobile_number,
+          additional_mobile_number: this.additional_mobile_number,
+          address: this.address,
+          city: this.city,
+          id: this.editAddressDetails.data.id
+        }
+        console.log(addressDetails)
+        this.$store.dispatch('updateAddress', {addressDetails, token});
       }
     },
     watch: {
       editAddressDetails: {
         handler(value) {
-          console.log(value, this.editAddressDetails.data);
-          this.state_region = value.data.state_region
-          this.first_name = value.data.first_name
-          this.last_name = value.data.last_name
-          this.mobile_number = value.data.mobile_number
-          this.additional_mobile_number = value.data.additional_mobile_number
-          this.address = value.data.address
-          this.city = value.data.city
+          if(value) {
+            console.log(value, this.editAddressDetails.data);
+            this.state_region = value.data.state_region
+            this.first_name = value.data.first_name
+            this.last_name = value.data.last_name
+            this.mobile_number = value.data.mobile_number
+            this.additional_mobile_number = value.data.additional_mobile_number
+            this.address = value.data.address
+            this.city = value.data.city
+          }
+          this.$store.commit('updateSelectedLga', value.data.state_region)
         },
         immediate: true,
       },

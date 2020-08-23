@@ -129,23 +129,23 @@ div.edit__address {
         }
       }
     }
-  }
-  .updating-address-spinner-bg {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    background: rgba(247,247,247,0.7);
-    z-index: 4;
-    .updating-address-spinner {
+    .updating-address-spinner-bg {
       position: absolute;
-      width: 50px;
-      left: 50%;
-      top: 50%;
-      margin-left: -25px;
-      margin-top: -25px;
-      img {
-        width: 100%;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      background: rgba(247,247,247,0.7);
+      z-index: 4;
+      .updating-address-spinner {
+        position: absolute;
+        width: 50px;
+        left: 50%;
+        top: 50%;
+        margin-left: -25px;
+        margin-top: -25px;
+        img {
+          width: 100%;
+        }
       }
     }
   }

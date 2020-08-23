@@ -31,7 +31,7 @@
               </div>
             </div>
 
-            <p class="all__addresses-default">SAVED ADDRESSES</p>
+            <p v-if="savedAddresses.length > 0" class="all__addresses-default">SAVED ADDRESSES</p>
             <div class="default-address-details" v-for="(addresses, index) in savedAddresses" :key="index">
               <input
               class="default-address-details-input" 

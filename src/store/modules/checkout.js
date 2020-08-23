@@ -130,5 +130,27 @@ export const actions = {
       console.log(err.response.data.message)
       commit('addressSpinnerLoading', false)
     })
+  },
+  updateAddress({ commit, dispatch }, payload) {
+    const { addressDetails, token } = payload;
+    const config = { headers: { token } };
+    console.log(addressDetails, token);
+    const { id, additional_mobile_number, address, city, first_name, last_name, mobile_number, state_region } = addressDetails;
+    commit('addressSpinnerLoading', true);
+    axios.put('/address', {
+      id, additional_mobile_number, address, city, first_name, last_name, mobile_number, state_region
+    }, config)
+    .then(res => {
+      console.log(res)
+      commit('addressSpinnerLoading', false)
+      dispatch('getAddress', token);
+      commit('showAddAddress', false);
+      commit('showEditAddressBox', false)
+    })
+    .catch(err => {
+      console.log(err)
+      commit('addressSpinnerLoading', false)
+    });
+
   }
 }
