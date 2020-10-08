@@ -148,6 +148,9 @@ import router from '../router/index'
       cartItems() {
         this.selectedQuantity = this.cartItems.map(item => item.quantity);
       }
+    },
+    destroyed() {
+      this.$store.commit('addressSpinnerLoading', false);
     }
   }
 </script>

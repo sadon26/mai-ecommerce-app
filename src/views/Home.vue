@@ -58,7 +58,7 @@ export default {
             console.log(res);
             store.dispatch('signinWithGoogle', {res, token});
             store.dispatch('getAllCartItems', token)
-            store.dispatch('getAllWishlists', token)
+            store.dispatch('getAllWishLists', token)
           })
             .catch(err => console.log(err));
       }

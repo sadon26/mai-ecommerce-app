@@ -108,6 +108,9 @@ export const actions = {
             })
             .catch(err => {
               console.log(err.response.data.message)
+              commit('wishListAddedPopup', true)
+              commit('wishListMessage', err.response.data.message.name);
+              setTimeout(() => commit('wishListAddedPopup', false), 3000);
               commit('addressSpinnerLoading', false)
             })
           } else {

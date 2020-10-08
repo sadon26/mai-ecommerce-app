@@ -1,8 +1,9 @@
 <template>
 <div class="categories__wrapper">
   <div class="categories">
-    <div v-if="loadingCategorySpinner" class="loading-category-spinner">
-      <img src="../assets/images/Ellipsis-spinner.svg" alt="ellipsis-spinner">
+    <div v-if="loadingCategorySpinner" class="loading-cat">
+      <!-- <img src="../assets/images/Ellipsis-spinner.svg" alt="ellipsis-spinner"> -->
+      <CardLoader v-for="(n, index) in 6" :key="index" />
     </div>
     <p class="category-name" v-if="productsInCategory">{{ productsInCategory[0].category }}</p>
     <div class="category-name__products">
@@ -35,10 +36,12 @@
 
 <script>
 import ProductOverview from '../components/ProductOverview'
+import CardLoader from '../components/CardLoader'
 import { mapGetters, mapActions } from 'vuex';
 
 export default {
   components: {
+    CardLoader,
     ProductOverview,
   },
   computed: {
@@ -47,7 +50,7 @@ export default {
       'errorGettingProduct',
       'loadingCategorySpinner',
       'productOverview',
-      ])
+    ])
   },
   methods: {
     ...mapActions([
@@ -59,4 +62,12 @@ export default {
 
 <style lang="scss">
 @import '../assets/scss/categories';
+.loading-cat {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 50px;
+  grid-gap: 15px;
+  grid-row-gap: 40px;
+}
 </style>

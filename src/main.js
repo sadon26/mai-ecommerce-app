@@ -26,31 +26,38 @@ Vue.prototype.$uuid = uuidv4();
 new Vue({
   store,
   router,
+  watch: {
+    '$store.getters.user'(newValue) {
+      if (this.$store.getters.user) {
+        refreshToken()      
+      }
+      console.log('hello');
+    }
+  },
   render: h => h(App)
 }).$mount('#app')
 
 export const eventBus = new Vue({})
 
-const token = store.getters.user.token;
-
-const refreshToken = (token) => {
+function refreshToken() {
   const interval = setInterval(() => {
-    const decoded = jwt_decode(token);
-    const date = new Date();
-    const currentDate = Number(String(date.getTime()).slice(0, 10));
-    if(currentDate >= decoded.exp) {
-      alert('token has expired');
-      clearInterval(interval);
+    if (store.getters.user) {
+      const token = store.getters.user.token;
+      const decoded = jwt_decode(token);
+      const date = new Date();
+      const currentDate = Number(String(date.getTime()).slice(0, 10));
+      const $1min = 60
+      if (currentDate >= (decoded.exp - $1min)) {
+        console.log(decoded.exp - $1min, currentDate)
+        const config = { headers: { token } }
+        axios.get('/token', config)
+        .then(res => {
+          console.log(res.data.token)
+          store.commit('refreshToken', res.data.token);
+        })
+        .catch(err => console.log(err))        
+      }
     }
   }, 1000);
 }
 
-axios.get('/token')
-.then(res => {
-  console.log(res.data.token)
-  const decoded = jwt_decode(res.data.token);
-  console.log(decoded)
-  })
-    .catch(err => console.log(err))
-
-refreshToken(token)

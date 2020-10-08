@@ -67,6 +67,9 @@ export const mutations = {
     }
     state.isLoggedIn = true;
     console.log(state.userDetails, state.isLoggedIn);
+  },
+  refreshToken(state, token) {
+    state.userDetails.token = token;
   }
 }
 
@@ -80,9 +83,9 @@ export const actions = {
         commit('signup', userDetails);
         commit('verifyAcctDisplay', true);
         dispatch('getAllCartItems', res.data.data.token)
-        dispatch('getAllWishlists', res.data.data.token)
+        dispatch('getAllWishLists', res.data.data.token)
         commit('storeUser', res);
-        console.log(res)
+        console.log(res);
       })
       .catch(err => {
         console.log(err.response.data.message);
@@ -120,5 +123,5 @@ export const actions = {
     commit('signinWithGoogle', userData);
     setTimeout(() => {commit('loginSuccessPopup', true)}, 300)
     setTimeout(() => {commit('loginSuccessPopup', false)}, 7000)
-  }
+  },
 }

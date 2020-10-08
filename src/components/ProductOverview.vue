@@ -1,6 +1,6 @@
 <template>
 <div @click="hideProductModal" class="product-overview-wrapper">
-  <div ref="productOverview" class="product-overview">
+  <div class="product-overview">
     <div @click="hideProductOverview" class="cancel-icon">
       <img src="../assets/images/cancel-black.svg" alt="cancel-icon">
     </div>
