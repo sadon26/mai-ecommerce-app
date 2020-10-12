@@ -83,7 +83,7 @@ import CardLoader from '../components/CardLoader'
     },
     watch: {
       productDetails(value) {
-        this.$route.params.product_name = value.product
+        this.$route.params.product_name = value.product;
         this.$router.push(`/search/${value.product}`);
       }
     }
