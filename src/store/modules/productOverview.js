@@ -8,17 +8,9 @@ export const getters = {
 export const mutations = {
   showProductOverview(state, payload) {
     state.showProductOverview = payload;
-    console.log(payload);
+    console.log(payload)
   },
   hideProductOverview(state) {
     state.showProductOverview = null;
-  }
-}
-export const actions = {
-  showProductOverview({ commit }, payload) {
-    commit('showProductOverview', payload);
-  },
-  hideProductOverview({ commit }) {
-    commit('hideProductOverview');
   }
 }

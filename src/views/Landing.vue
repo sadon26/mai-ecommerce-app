@@ -1,7 +1,7 @@
 <template>
 <div class="home">
   <transition name="slide" mode="out-in">
-    <LoginSuccessPopup />
+    <LoginSuccessPopup v-if="loginSuccessPopup" />
   </transition>
   <transition name="slide" mode="out-in">
     <ItemAddedPopup />
@@ -9,7 +9,7 @@
   <transition name="move" mode="out-in">
     <WishListAddedPopup />
   </transition>
-  <NavBar @getProducts="getProducts($event)" />
+    <NavBar @getProducts="getProducts($event)" />
   <router-view />
   <Login v-if="loginModal" />
   <div class="cart-and-wishlist-wrap">
@@ -19,7 +19,7 @@
         {{ cartItems.length }}
       </div>
     </router-link>
-    <div v-if="isLoggedIn" @click="$store.dispatch('showHideWishList', true)" class="wishlist-icon">
+    <div v-if="isLoggedIn" @click="showWishList = true" class="wishlist-icon">
       <img v-if="!wishList.length" src="../assets/images/wishlist-icon.svg">
       <img class="heart-animated" v-if="wishList.length" src="../assets/images/full-heart-icon.png">
       <div v-if="wishList.length" class="items-in-cart">
@@ -28,7 +28,9 @@
     </div>
   </div>
   <Footer />
-    <WishList v-if="showHideWishList" />
+    <transition name="slide-from-side">
+      <WishList v-if="showWishList" @hideWishList="showWishList = false" />
+    </transition>
 </div>
 </template>
 

@@ -85,6 +85,8 @@ export const actions = {
         dispatch('getAllCartItems', res.data.data.token)
         dispatch('getAllWishLists', res.data.data.token)
         commit('storeUser', res);
+        setTimeout(() => {commit('loginSuccessPopup', true)}, 300)
+        setTimeout(() => {commit('loginSuccessPopup', false)}, 7000)
         console.log(res);
       })
       .catch(err => {
@@ -102,7 +104,7 @@ export const actions = {
         commit('storeUser', res);
         setTimeout(() => {commit('loginSuccessPopup', true)}, 300)
         setTimeout(() => {commit('loginSuccessPopup', false)}, 7000)
-        dispatch('toggleLoginModal', false);
+        commit('toggleLoginModal', false);
         if (router.history.current.path === '/signup') {
           router.push('/');
         }

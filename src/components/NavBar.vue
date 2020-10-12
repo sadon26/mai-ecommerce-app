@@ -1,17 +1,21 @@
 <template>
     <div class="nav-bar">
-    <div class="home-logo">
+    <router-link to="/" class="home-logo">
       <p class="home-logo__text">Mai</p>
       <div class="__logo">
         <img src="../assets/images/processed.png" alt="">
       </div>
-    </div>
+    </router-link>
     <nav class="home-nav">
+
       <div class="home-nav-wrapper-item">
+        
         <div class="home-nav__wrapper">
-          <router-link class="home-nav__wappper-links" :to="{path: '/'}">HOME</router-link>
-          <router-link class="home-nav__wappper-links" :to="{path: '/about'}">ABOUT</router-link>
-          <a class="home-nav__wappper-links __cat">
+          <router-link @click="category = ''" class="home-nav__wappper-links" :to="{path: '/'}">HOME</router-link>
+          <router-link @click="category = ''" class="home-nav__wappper-links" :to="{path: '/about'}">ABOUT</router-link>
+          <a 
+            class="home-nav__wappper-links __cat"
+            >
             <p class="__text">CATEGORIES</p>
             <div class="home-nav__arrow-down">
               <img src="../assets/images/arrow-down.svg" alt="arrow-down">
@@ -30,6 +34,7 @@
             </ul>
           </a>
         </div>
+
         <div class="search-product">
           <div class="search-product__wrapper">
             <div class="search-product__wrapper-left">
@@ -46,7 +51,9 @@
             </div>
           </div>
         </div>
+
       </div>
+
     </nav>
     <Login v-if="loginModal" />
   </div>
@@ -54,7 +61,7 @@
 
 <script>
 import Login from '../components/Login.vue'
-import { mapActions, mapGetters } from 'vuex';
+import { mapActions, mapGetters, mapMutations } from 'vuex';
 
 export default {
   components: {
@@ -73,18 +80,36 @@ export default {
       isLoggedIn: 'isLoggedIn',
       loginModal: 'loginModal',
       userInfo: 'user',
-      categories: 'getProductCategories'
+      categories: 'getProductCategories',
     })
   },
   methods: {
     ...mapActions([
       'search',
       'getProducts',
+    ]),
+    ...mapMutations([
       'toggleLoginModal',
     ]),
     logout() {
       this.$router.push({ path: '/login' })
       this.$store.dispatch('logout')
+    },
+    addBorder() {
+      const catLink = document.querySelector('.home-nav__wappper-links.__cat');
+      if(this.$router.history.current.name === 'Categories') {
+        catLink.classList.add('border')
+      } else {
+        catLink.classList.remove('border')
+      }
+    }
+  },
+  mounted() {
+    this.addBorder()
+  },
+  watch: {
+    $route() {
+      this.addBorder()
     }
   },
 }

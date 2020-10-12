@@ -1,6 +1,7 @@
 <template>
   <div>
     <carousel 
+    class="carousel-wrapper"
       :autoplay="true"
       :per-page="1" 
       :autoplayTimeout="3000"
@@ -43,11 +44,6 @@ export default {
     Carousel,
     Slide,
   },
-  methods: {
-    signinWithGoogle(res) {
-      console.log(res)
-    }
-  },
   beforeRouteEnter(to, from, next) {
     if(to.query) {
       const token = to.query.token;
@@ -67,5 +63,8 @@ export default {
       next('/')
     }
   },
+  destroyed() {
+    store.commit('loginSuccessPopup', false);
+  }
 }
 </script>

@@ -11,9 +11,3 @@ export const mutations = {
     state.loginModal = data;
   }
 }
-
-export const actions = {
-  toggleLoginModal({ commit }, data) {
-    commit('toggleLoginModal', data);
-  }
-}

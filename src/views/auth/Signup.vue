@@ -51,12 +51,22 @@
                     <p class="show-password" @click="showPassword = !showPassword">Show password</p>
                 </div>
 
+                <transition name="slide-into">
+                    <div v-show="passwordStrength">
+                        <div class="password__strength">
+                            <div ref="password" class="password__strength-length"></div>
+                        </div>
+                        <div class="password__strength-text" v-if="passwordStrength">{{ passwordStrength }}</div>
+                    </div>
+                </transition>
+
                 <a href="http://dry-wildwood-70605.herokuapp.com/google" target="__blank" class="sign-up-with-google">
                     <p class="__text">Or Sign up with Google</p>
                     <div class="sign-up-with-google__logo">
                         <img src="../../assets/images/google-logo.png" alt="google-icon">
                     </div>
                 </a>
+
                 <div class="fifth">
                     <input v-model="checked" type="checkbox">
                     <p>I agree to Terms and Conditions. See Privacy and Cookie Policy for information on how we use the the information you provide to us.</p>
@@ -137,6 +147,7 @@ export default {
             phone_number: '',
             showPassword: false,
             checked: false,
+            passwordStrength: '',
         }
     },
     computed: {
@@ -162,9 +173,34 @@ export default {
             this.$router.push({ path: '/' });
         },
         toggleLoginModal(data) {
-            this.$store.dispatch('toggleLoginModal', data)
+            this.$store.commit('toggleLoginModal', data)
         }
     },
+    watch: {
+        password(value) {
+            const { password } = this.$refs;
+            if(!value) {
+                this.passwordStrength = '';
+                password.style.width = "0%";
+            }
+            else if(value.length < 3) {
+                password.style.width = "10%";
+                this.passwordStrength = "Very weak"
+            } else if(value.length < 6) {
+                password.style.width = "30%";
+                password.style.background = "orangered";
+                this.passwordStrength = "Weak"
+            } else if(value.length < 12) {
+                password.style.width = "65%";
+                password.style.background = "orange";
+                this.passwordStrength = "Fairly strong"
+            } else {
+                password.style.background = "green";
+                password.style.width = "100%";
+                this.passwordStrength = "Very strong"
+            }
+        }
+    }
 }
 </script>
 

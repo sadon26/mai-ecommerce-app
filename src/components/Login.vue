@@ -62,7 +62,7 @@ export default {
   },
   methods: {
     toggleLoginModal(data) {
-        this.$store.dispatch('toggleLoginModal', data)
+        this.$store.commit('toggleLoginModal', data)
     },
     submit() {
       const user = {

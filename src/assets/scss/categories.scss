@@ -16,13 +16,39 @@ div.categories__wrapper {
         height: 100%;
       }
     }
-    .category-name {
+    .category-heading {
       padding: 20px;
       margin: 0;
       margin-bottom: 20px;
-      background: #455164;
+      background: $darkGrey;
       border-radius: 4px;
       @include fontStyle(PlayFairDisplay, 28px, 700, #fff);
+
+      &-bg-pet {
+        background: 
+          linear-gradient(125deg,rgba(124, 84, 84, 0.411) 0%, rgba(134, 73, 49, 0.904) 80%), 
+          url('../assets/images/pug.jpg');
+          background-position:  10% 25%;
+      }
+      
+      &-bg-supp {
+        background: 
+          linear-gradient(125deg,rgba(124, 84, 84, 0.411) 0%, rgba(49, 134, 95, 0.904) 80%), 
+          url('../assets/images/abstract.jpg');
+          background-position:  10% 20%;
+      }
+
+      &-bg-sexp {
+        background: orange;
+      }
+      
+      &-bg-antib {
+        background: green;
+      }
+
+      &-text {
+        margin: 0;
+      }
     }
     .category-name__products {
       display: grid;

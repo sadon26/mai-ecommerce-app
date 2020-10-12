@@ -21,7 +21,6 @@ export const mutations = {
   },
   setProducts(state, productsInCategory) {
     state.productsInCategory = productsInCategory;
-    console.log(state.productsInCategory);
   },
   errorGettingProduct(state, errorGettingProduct) {
     state.errorGettingProduct = errorGettingProduct;

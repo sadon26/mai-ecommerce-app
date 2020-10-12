@@ -17,6 +17,8 @@
         <img src="../assets/images/empty-cart.svg" alt="empty-cart-icon">
       </div>
       <p class="cart__empty-text">Cart is empty</p>
+      <br />
+      <br />
     </div>
     <div v-if="cartItems.length" class="cart__data">
       <p class="cart__data-heading one">ITEM</p>
@@ -151,6 +153,7 @@ import router from '../router/index'
     },
     destroyed() {
       this.$store.commit('addressSpinnerLoading', false);
+      this.$store.commit('wishListAddedPopup', false);
     }
   }
 </script>

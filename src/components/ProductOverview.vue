@@ -1,15 +1,15 @@
 <template>
 <div @click="hideProductModal" class="product-overview-wrapper">
   <div class="product-overview">
-    <div @click="hideProductOverview" class="cancel-icon">
+    <div @click="showProductOverview" class="cancel-icon">
       <img src="../assets/images/cancel-black.svg" alt="cancel-icon">
     </div>
     <div class="product-overview-heading">
-      <p>{{ productOverview.product_name }}</p>
+      <p>{{ productOverview.product_name !== undefined || null ? productOverview.product_name : productOverview.product }}</p>
       <p>{{ productOverview.price | toCurrency }}</p>
     </div>
     <div class="product-description">
-      {{ productOverview.product_description }}
+      {{ productOverview.product_description !== undefined || null ? productOverview.product_description : productOverview.description }}
     </div>
     <div class="product-add-btn">
       <button @click="addToCart(productOverview)" class="add-to-cart">Add to Cart</button>
@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex';
+import { mapGetters, mapMutations } from 'vuex';
 
   export default {
     computed: {
@@ -29,12 +29,15 @@ import { mapGetters, mapActions } from 'vuex';
       ])
     },
     methods: {
-      ...mapActions([
-        'hideProductOverview',
+      ...mapMutations([
+        'hideProductOverview'
       ]),
+      showProductOverview() {
+        this.$emit('showProductOverview')
+      },
       hideProductModal(e) {
         if(e.target.classList[0] === "product-overview-wrapper") {
-          this.hideProductOverview()
+          this.showProductOverview()
         }
       },
       addToCart(productOverview) {
@@ -49,12 +52,14 @@ import { mapGetters, mapActions } from 'vuex';
         if (this.$store.getters.isLoggedIn) {
           const token = this.$store.getters.user.token;
           this.$store.dispatch('addToWishList', {productOverview, token});
-          console.log("ds")
         } else {
           this.$store.dispatch('toggleLoginModal', true)
         }
       },
     },
+    destroyed() {
+      this.hideProductOverview()
+    }
   }
 </script>
 

@@ -1,11 +1,12 @@
 <template>
-  <div class="wish-list">
-  <transition name="slide-from-side" mode="out-in">
+  <div class="wish-list hide-wish-list" @click="hideWishList">
+
     <div class="wish-list-wrapper">
+
       <div class="wish-list-heading">
         <p class="wish-list-heading__text">Wish List</p>
-        <div @click="$store.dispatch('showHideWishList', false)" class="wish-list-cancel">
-          <img src="../assets/images/cancel-icon-pink.svg" alt="">
+        <div class="wish-list-cancel hide-wish-list">
+          <img class="hide-wish-list" src="../assets/images/cancel-icon-pink.svg" alt="">
         </div>
       </div>
       <div v-if="wishList.length > 0" class="wishlist-items">
@@ -23,11 +24,13 @@
           </div>
         </div>
       </div>
+
       <div class="no-wishlists" v-if="wishList.length === 0">
         <p>No wishlists to show...</p>
       </div>
+
     </div>
-  </transition>
+
   </div>
 </template>
 
@@ -50,6 +53,11 @@ import { mapGetters, mapActions } from 'vuex'
       moveToCart(item) {
         const token = this.$store.getters.user.token;
         this.$store.dispatch('moveToCart', {token, item})
+      },
+      hideWishList(e) {
+        if(e.target.classList[0] === "wish-list" || e.target.classList[0] === "wish-list-cancel" || e.target.classList[0] === "hide-wish-list") {
+          this.$emit('hideWishList', false);
+        }
       }
     },
   }

@@ -7,6 +7,7 @@ const Home = () => import('../views/Home.vue');
 const Categories = () => import('../views/Categories.vue');
 const Cart = () => import('../views/Cart.vue');
 const Checkout = () => import('../views/Checkout.vue');
+const SearchProduct = () => import('../views/SearchProduct.vue');
 
 Vue.use(VueRouter)
 
@@ -32,15 +33,20 @@ const routes = [
         component: Categories,
       },
       {
-        path: '/cart',
+        path: 'cart',
         name: 'Cart',
         component: Cart,
       },
       {
-        path: '/checkout',
+        path: 'checkout',
         name: 'Checkout',
         component: Checkout,
       },
+      {
+        path: 'search/:product_name',
+        name: 'Search-Product',
+        component: SearchProduct
+      }
     ]
   },
 ]
@@ -48,7 +54,10 @@ const routes = [
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
-  routes
+  routes,
+  scrollBehavior(to, from, savedPosition) {
+    return { x: 0, y: 0 }
+  }
 })
 
 export default router

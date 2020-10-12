@@ -94,8 +94,9 @@ nav {
             @include fontStyle(PlayFairDisplay, 17px, 400, $darkGrey);
         }
     }
-
+    
     .right {
+        width: 410px;
         .first {
             @include d-flex(space-between, center);
             width: 100%;
@@ -156,14 +157,42 @@ nav {
             .show-password {
                 position: absolute;
                 right: 15px;
-                top: 52px;
+                top: 50px;
                 color: #3468ff;
                 text-decoration: underline;
+                padding: 2px 5px;
+                background: #fff;
+                z-index: 5;
                 &:hover {
                     cursor: pointer;
                 }
             }
         }
+
+        .password__strength {
+            width: 100%;
+            height: 4px;
+            background: #ccc;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            position: relative;
+            
+            
+            &-length {
+                position: absolute;
+                width: 0%;
+                background: red;
+                height: 4px;
+                border-radius: 4px;
+                transition: all .5s ease-out;
+            }
+
+            &-text {
+                @include fontStyle(Poppins, 14px, 400, $darkGrey);
+                margin-bottom: 10px;
+            }
+        }
+
         .sign-up-with-google {
             text-decoration: none;
             width: 100%;
@@ -240,6 +269,28 @@ nav {
                 cursor: not-allowed;
             }
         }
+    }
+}
+
+.slide-into-enter-active {
+    animation: slide-into .2s ease-out both;
+}
+
+.slide-into-leave-active {
+    animation: slide-into .2s ease-out both reverse;
+}
+
+@keyframes slide-into {
+    0% {
+        opacity: 0;
+        transform: translateY(-30px)
+    }
+    50% {
+        opacity: .3;
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
 

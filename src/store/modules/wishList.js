@@ -11,26 +11,18 @@ export const getters = {
   wishList: state => state.wishLists,
   wishListAddedPopup: state => state.wishListAddedPopup,
   wishListMessage: state => state.wishListMessage,
-  showHideWishList: state => state.showWishList,
 }
 
 export const mutations = {
   wishListAddedPopup(state, payload) {
     state.wishListAddedPopup = payload;
-    console.log(state.wishListAddedPopup)
   },
   getAllWishLists(state, wishLists) {
-    console.log(wishLists)
     state.wishLists = wishLists
   },
   wishListMessage(state, payload) {
     state.wishListMessage = payload
-    console.log(state.wishListMessage)
   },
-  showHideWishList(state, payload) {
-    state.showWishList = payload
-    console.log(payload)
-  }
 }
 
 export const actions = {
@@ -60,10 +52,7 @@ export const actions = {
       console.log(res)
       commit('getAllWishLists', res.data.wishList);
     })
-    .catch(err => console.log('here', err.response.data.message))
-  },
-  showHideWishList({ commit }, payload) {
-    commit('showHideWishList', payload);
+    .catch(err => console.log(err.response.data.message))
   },
   deleteWishList({ commit, dispatch }, payload) {
     const { token, item } = payload
